@@ -4,15 +4,15 @@ driftinfo:
     send_to_email: ''
 
 driftinfo_for_sms:
-    sid = ''
-    token = ''
-    nummer = ''
-    to_nummer = '' 
+    sid: ''
+    token: ''
+    nummer: ''
+    to_nummer: '' 
 
 driftinfo_for_twitter:
-   key = ''
-   secret = ''
-   token = ''
-   token_secret = ''
+    key: ''
+    secret: ''
+    token: ''
+    token_secret: ''
 
 
