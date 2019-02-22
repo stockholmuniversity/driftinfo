@@ -15,4 +15,6 @@ driftinfo_for_twitter:
     token: ''
     token_secret: ''
 
+driftinfo_for_database:
+    path_to_database: ''
 
