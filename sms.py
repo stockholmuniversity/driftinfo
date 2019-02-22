@@ -16,7 +16,7 @@ def send_sms(sms):
     auth_token = cfg['driftinfo_for_sms']['token']
     client = Client(account_sid, auth_token)
 
-    #    numbers_to_message = ['+46766051555', '+46760344070']
+    #    numbers_to_message = ['', '']
     #   for number in numbers_to_message:
     #      client.messages.create(
     #          body = sms,
@@ -37,7 +37,7 @@ def connect_to_message():
     print(""" Connect to MySQL database """)
     try:
         print('Connecting to MySQL database...')
-        conn = sqlite3.connect("/home/usko/flask/venv/app/driftinfo.db")
+        conn = sqlite3.connect(cfg['driftinfo_for_database']['path_to_database'])
         now = datetime.now()
         dtime = now.strftime("%d/%m/%Y %H:%M:%S")
 
@@ -50,11 +50,6 @@ def connect_to_message():
         print("Printing each row's column values in driftinfo")
         for row in records:
             send_sms(row[3])
-            # print("id = ",  row[0])
-            # print("big = ", row[1])
-            # print("small = ", row[2])
-            # print("sms = ", row[3])
-            # print("reg_date = ", row[4],"\n")
 
             sql_update_Query = "update driftinfo set sms_process =\"" + str(dtime) + "\" where id = " + str(row[0])
             cursor.execute(sql_update_Query)
