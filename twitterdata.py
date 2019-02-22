@@ -1,7 +1,6 @@
 import twitter
 from datetime import datetime
 import sqlite3
-
 import yaml
 
 
@@ -25,7 +24,7 @@ def send_to_twitter(twitter_data):
 
 def connect_to_Twitter():
     try:
-        conn = sqlite3.connect("/home/usko/flask/venv/app/driftinfo.db")
+        conn = sqlite3.connect(cfg['driftinfo_for_database']['path_to_database'])
         now = datetime.now()
         dtime = now.strftime("%d/%m/%Y %H:%M:%S")
         sql_select_Query = 'select * from driftinfo where twitter_process = 0'
@@ -36,11 +35,6 @@ def connect_to_Twitter():
         print("Printing each row's column values in driftinfo")
         for row in records:
             send_to_twitter(row[3])
-            #	    print("id = ",  row[0])
-            #	    print("big = ", row[1])
-            #	    print("small = ", row[2])
-            #	    print("sms = ", row[3])
-            #	    print("reg_date = ", row[4],"\n")
             sql_update_Query = "update driftinfo set twitter_process =\"" + str(dtime) + "\" where id  = " + str(row[0])
             cursor.execute(sql_update_Query)
             conn.commit()
