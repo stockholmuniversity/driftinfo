@@ -15,7 +15,7 @@ def bacon_form():
        rubrik = request.form.get('rubrik')
        wordpress = request.form.get('wordpress')
        twitter = request.form.get('twitter')
-       conn = sqlite3.connect("/home/usko/flask/venv/app/driftinfo.db")
+       conn = sqlite3.connect(cfg['driftinfo_for_database']['path_to_database'])
        cur = conn.cursor()
        cur.execute("INSERT INTO driftinfo (rubrik,big,small,sms,wordpress_process)  VALUES(?,?,?,?,?)",(rubrik,long,short,sms,wordpress))
        conn.commit()
