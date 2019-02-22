@@ -3,6 +3,11 @@ from flask import render_template, request, flash
 from app import app
 from app import db
 import sqlite3
+import yaml 
+
+config_file = 'config_file.yml'
+with open(config_file,'r') as ymlfile:
+    cfg = yaml.load(ymlfile)
 
 @app.route('/')
 @app.route('/', methods=['GET', 'POST'])
