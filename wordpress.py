@@ -36,7 +36,7 @@ def connect_to_Wordpress():
     print( """ Connect to MySQL database """)
     try:
         print('Connecting to MySQL database...')
-        conn = sqlite3.connect("/home/usko/flask/venv/app/driftinfo.db")
+        conn = sqlite3.connect(cfg['driftinfo_for_database']['path_to_database'])
 
         now = datetime.now()
         dtime = now.strftime("%d/%m/%Y %H:%M:%S")
