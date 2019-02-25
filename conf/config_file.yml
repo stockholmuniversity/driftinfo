@@ -1,3 +1,5 @@
+app:
+    secret_key: ''
 driftinfo:
     email_from: ''
     password: ''
