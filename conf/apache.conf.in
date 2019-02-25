@@ -11,10 +11,13 @@
 
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
-        Alias "/assets" "/local/driftinfo/assets"
         ProxyPass "/" "http://localhost:5000/"
         ProxyPassReverse "/" "http://localhost:5000/"
 
+        Alias "/assets" "/local/driftinfo/assets"
+        <Directory "/local/driftinfo/assets">
+                Require all granted
+        </Directory>
         # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
         # error, crit, alert, emerg.
         # It is also possible to configure the loglevel for particular
