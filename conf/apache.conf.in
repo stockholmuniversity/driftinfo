@@ -11,6 +11,7 @@
 
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
+        Alias "/assets" "/local/driftinfo/assets"
         ProxyPass "/" "http://localhost:5000/"
         ProxyPassReverse "/" "http://localhost:5000/"
 
