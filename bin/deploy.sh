@@ -30,6 +30,7 @@ else
     
 fi
 cp -a app ${venv}
+cp -a assets ${BASEDIR}
 cp -a bin ${BASEDIR}
 cp -a conf ${BASEDIR}
 sed 's/%%HOST%%/'${HOST}'/g' ${BASEDIR}/conf/apache.conf.in > /etc/apache2/sites-enabled/000-default-le-ssl.conf 
