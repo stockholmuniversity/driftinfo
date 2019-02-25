@@ -5,7 +5,7 @@ from app import db
 import sqlite3
 import yaml 
 
-config_file = 'config_file.yml'
+config_file = '/local/driftinfo/conf/config_file.yml'
 with open(config_file,'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
@@ -22,7 +22,7 @@ def bacon_form():
            disturbance = 1
        conn = sqlite3.connect(cfg['driftinfo_for_database']['path_to_database'])
        cur = conn.cursor()
-       cur.execute("INSERT INTO driftinfo (headline,long_text,brief_text,disturbance)  VALUES(?,?,?,?,?)",(headline,long_text,brief_text,disturbance))
+       cur.execute("INSERT INTO driftinfo (headline,long_text,brief_text,disturbance)  VALUES(?,?,?,?)",(headline,long_text,brief_text,disturbance))
        conn.commit()
        cur.close()
        return   "<div>Din driftinformation har processats<br/>Rubrik: {}<br/>Lång information (mejl/wordpress etc): {}<br/>Kort text (Twitter/sms etc): {}<br/>Driftstörning: {}<br/></div>".format(headline,long_text,brief_text,disturbance)

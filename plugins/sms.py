@@ -5,7 +5,7 @@ import sqlite3
 import yaml
 
 
-config_file = 'config_file.yml'
+config_file = '/local/driftinfo/conf/config_file.yml'
 with open(config_file,'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 

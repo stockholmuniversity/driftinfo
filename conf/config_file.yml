@@ -1,5 +1,5 @@
 app:
-    secret_key: ''
+    secret_key: 'kano0049'
 driftinfo:
     email_from: ''
     password: ''
@@ -18,5 +18,5 @@ driftinfo_for_twitter:
     token_secret: ''
 
 driftinfo_for_database:
-    path_to_database: ''
+    path_to_database: '/local/driftinfo/db/driftinfo.db'
 
