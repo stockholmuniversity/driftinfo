@@ -9,7 +9,7 @@ apt-get -y install python3 sqlite3
 
 BASEDIR="/local/driftinfo"
 venv="${BASEDIR}/venv"
-mkdir -p "${BASEDIR}/db"
+mkdir -p ${BASEDIR}/{db,logs}
 sqlite3 "${BASEDIR}/db/driftinfo.db" "$(cat conf/table.sql)"
 if [[ ! -d "${venv}" ]]; then
     python3 -m venv "${venv}"
@@ -19,9 +19,14 @@ if [[ ! -d "${venv}" ]]; then
     pip install flask_sqlalchemy
     pip install pyyaml
     pip install sqlalchemy
+else
+    source "${venv}/bin/activate"
+    pip install --upgrade flask
+    pip install --upgrade flask_sqlalchemy
+    pip install --upgrade pyyaml
+    pip install --upgrade sqlalchemy
     
 fi
 cp -a app ${venv}
+cp -a bin ${BASEDIR}
 cp -a conf ${BASEDIR}
-export FLASK_APP=${venv}/app/main.py
-flask run

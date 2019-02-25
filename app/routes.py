@@ -10,7 +10,7 @@ with open(config_file,'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
 @app.route('/')
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/submit', methods=['POST'])
 def bacon_form():
     if request.method == "POST":
        brief_text = request.form.get('brief_text')
@@ -25,7 +25,7 @@ def bacon_form():
        cur.execute("INSERT INTO driftinfo (headline,long_text,brief_text,disturbance)  VALUES(?,?,?,?)",(headline,long_text,brief_text,disturbance))
        conn.commit()
        cur.close()
-       return   "<div>Din driftinformation har processats<br/>Rubrik: {}<br/>Lång information (mejl/wordpress etc): {}<br/>Kort text (Twitter/sms etc): {}<br/>Driftstörning: {}<br/></div>".format(headline,long_text,brief_text,disturbance)
+       return   """<h1>Din driftinformation har processats</h1><p>Rubrik: {}<br/>Lång information (mejl/wordpress etc): {}<br/>Kort text (Twitter/sms etc): {}<br/>Driftstörning: {}</p><p><a href="/">Tillbaka</></p>""".format(headline,long_text,brief_text,disturbance)
     return render_template('/base.html', title='Home')
 
 
