@@ -5,8 +5,8 @@ if [ "$EUID" -ne 0 ]
 fi
 
 apt-get update
-apt-get -y install python3 sqlite3 apache2 certbot python-certbot-apache -t stretch-backports
-certbot --apache
+apt-get -y install python3 python3-venv sqlite3 apache2 certbot python-certbot-apache 
+certbot --apache -d $(hostname --fqdn)
 
 BASEDIR="/local/driftinfo"
 venv="${BASEDIR}/venv"
