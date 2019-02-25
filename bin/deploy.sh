@@ -6,6 +6,8 @@ fi
 HOST=$(hostname --fqdn)
 apt-get update
 apt-get -y install python3 python3-venv sqlite3 apache2 certbot python-certbot-apache 
+a2enmod proxy
+systemctl restart apache2
 
 BASEDIR="/local/driftinfo"
 venv="${BASEDIR}/venv"
