@@ -3,10 +3,9 @@ if [ "$EUID" -ne 0 ]
     then echo "Please run as root"
     exit
 fi
-
+HOST=$(hostname --fqdn)
 apt-get update
 apt-get -y install python3 python3-venv sqlite3 apache2 certbot python-certbot-apache 
-certbot --apache -d $(hostname --fqdn)
 
 BASEDIR="/local/driftinfo"
 venv="${BASEDIR}/venv"
@@ -31,3 +30,5 @@ fi
 cp -a app ${venv}
 cp -a bin ${BASEDIR}
 cp -a conf ${BASEDIR}
+sed 's/'${HOST}'/%%HOST%%/g' ${BASEDIR}/conf/apache.conf.in > /etc/apache2/sites-enabled/000-default-le-ssl.conf 
+certbot --apache -d ${HOST} --non-interactive --agree-tos --email 'sunet-scs@su.se'
