@@ -27,15 +27,15 @@ def connect_to_Twitter():
         conn = sqlite3.connect(cfg['driftinfo_for_database']['path_to_database'])
         now = datetime.now()
         dtime = now.strftime("%d/%m/%Y %H:%M:%S")
-        sql_select_Query = 'select * from driftinfo where twitter_process = 0'
+        sql_select_Query = 'select * from driftinfo where processed_twitter = 0'
         cursor = conn.cursor()
         cursor.execute(sql_select_Query)
         records = cursor.fetchall()
         print("Total of information in driftinfo is ", cursor.rowcount)
         print("Printing each row's column values in driftinfo")
         for row in records:
-            send_to_twitter(row[3])
-            sql_update_Query = "update driftinfo set twitter_process =\"" + str(dtime) + "\" where id  = " + str(row[0])
+            send_to_twitter(row[1])
+            sql_update_Query = "update driftinfo set twitter_process =" + str(dtime) + " where id  = " + str(row[0])
             cursor.execute(sql_update_Query)
             conn.commit()
         cursor.close()
