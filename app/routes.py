@@ -25,8 +25,8 @@ def bacon_form():
        cur.execute("INSERT INTO driftinfo (headline,long_text,brief_text,disturbance)  VALUES(?,?,?,?)",(headline,long_text,brief_text,disturbance))
        conn.commit()
        cur.close()
-       return   """<h1>Din driftinformation har processats</h1><p>Rubrik: {}<br/>Lång information (mejl/wordpress etc): {}<br/>Kort text (Twitter/sms etc): {}<br/>Driftstörning: {}</p><p><a href="/">Tillbaka</></p>""".format(headline,long_text,brief_text,disturbance)
-    return render_template('/base.html', title='Home')
+       return render_template('/submitted.html', headline=headline, long_text=long_text, brief_text=brief_text, disturbance=disturbance)
+    return render_template('/base.html')
 
 
 app.secret_key=cfg['app']['secret_key']
