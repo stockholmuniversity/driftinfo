@@ -16,7 +16,6 @@ systemctl restart apache2
 BASEDIR="/local/driftinfo"
 venv="${BASEDIR}/venv"
 mkdir -p ${BASEDIR}/{db,logs}
-sqlite3 "${BASEDIR}/db/driftinfo.db" "$(cat conf/table.sql)"
 if [[ ! -d "${venv}" ]]; then
     python3 -m venv "${venv}"
     source "${venv}/bin/activate"
@@ -45,6 +44,7 @@ cp -a assets ${BASEDIR}
 cp -a bin ${BASEDIR}
 cp -a conf ${BASEDIR}
 cp -a plugins ${venv}
+sqlite3 "${BASEDIR}/db/driftinfo.db" "$(cat conf/table.sql)"
 cd ..
 certbot --apache -d ${HOST} --non-interactive --agree-tos --email 'sunet-scs@su.se'
 sed 's/%%HOST%%/'${HOST}'/g' ${BASEDIR}/conf/apache.conf.in > /etc/apache2/sites-enabled/000-default-le-ssl.conf 
