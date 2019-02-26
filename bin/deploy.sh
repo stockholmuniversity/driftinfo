@@ -3,6 +3,7 @@ if [ "$EUID" -ne 0 ]
     then echo "Please run as root"
     exit
 fi
+mydir=$(pwd)
 tempdir=$(mktemp -d)
 cd ${tempdir}
 noclobber="/local/driftinfo/conf/config_file.yml"
@@ -49,4 +50,5 @@ for i in ${noclobber}; do
     short="saved/$(echo ${i} | sed 's_.*/__')"
     cp ${short} ${i}
 done
-rm ${tempdir}
+cd "${mydir}"
+rm -r "${tempdir}"
