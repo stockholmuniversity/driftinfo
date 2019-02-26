@@ -49,8 +49,8 @@ def connect_to_db():
         sql_select_Query = "select * from driftinfo where processed_" + service +" = 0"
         cursor = conn.cursor()
         cursor.execute(sql_select_Query)
-        print("Total of unprocessed messages for " + service + " in driftinfo is ", cursor.rowcount)
         records = cursor.fetchall()
+        print("Total of unprocessed messages for " + service + " in driftinfo is ", len(records))
         for row in records:
             message = row[4]
             if service in use_short:
