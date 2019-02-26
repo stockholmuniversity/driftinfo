@@ -9,7 +9,7 @@ cd ${tempdir}
 noclobber="/local/driftinfo/conf/config_file.yml"
 HOST=$(hostname --fqdn)
 apt-get update
-apt-get -y install python3 python3-venv sqlite3 apache2 certbot python-certbot-apache 
+apt-get -y install python3 python3-venv sqlite3 apache2 certbot python-certbot-apache git
 a2enmod proxy proxy_http
 systemctl restart apache2
 
@@ -38,6 +38,8 @@ for i in ${noclobber}; do
     short="saved/$(echo ${i} | sed 's_.*/__')"
     cp ${i} ${short}
 done
+git clone https://github.com/stockholmuniversity/driftinfo.git
+cd driftinfo
 cp -a app ${venv}
 cp -a assets ${BASEDIR}
 cp -a bin ${BASEDIR}
