@@ -16,7 +16,7 @@ def bacon_form():
        brief_text = request.form.get('brief_text')
        headline = request.form.get('headline')
        long_text  = request.form.get('long_text')
-       username  = request.form.get('long_text')
+       username  = request.form.get('username')
        disturbance_checkbox = request.form.get('disturbance')
        disturbance = 0
        if disturbance_checkbox == "on":
