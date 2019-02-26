@@ -26,7 +26,7 @@ def bacon_form():
        cur.execute("INSERT INTO driftinfo (headline,long_text,brief_text,disturbance,username)  VALUES(?,?,?,?,?)",(headline,long_text,brief_text,disturbance,username))
        conn.commit()
        cur.close()
-       return render_template('/submitted.html', headline=headline, long_text=long_text, brief_text=brief_text, disturbance=disturbance)
+       return render_template('/submitted.html', headline=headline, long_text=long_text, brief_text=brief_text, disturbance=disturbance, username=username)
     return render_template('/base.html')
 
 
