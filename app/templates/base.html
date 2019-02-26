@@ -20,8 +20,8 @@
             <img src="assets/su-blog.jpg" width="940" height="198" alt="SU Logo" />
             <H2>L&auml;gga ut driftinformation f&ouml;r SU</h2>
             <div>
-                H&auml;r l&auml;gger du ut driftinformation f&ouml;r alla kanaler<br>
-                F&ouml;r mer information om driftinformation se <a href="https://confluence.it.su.se/confluence/x/iYB5Ag">Confluence</a><br>
+                H&auml;r l&auml;gger du ut driftinformation f&ouml;r alla kanaler<br/>
+                F&ouml;r mer information om driftinformation se <a href="https://confluence.it.su.se/confluence/x/iYB5Ag">Confluence</a><br/>
                 F&ouml;r standrardtexter se <a href="https://confluence.it.su.se/confluence/x/AwTZAg" target="_blank">Standardtexter</a> 
                 <ul>
                     <li>
@@ -37,15 +37,15 @@
                     </li>
                 </ul>
                 <form method="POST" action="/submit" autocomplete="on" form="usrform" onsubmit="return validateForm()" >
-                    <label for="headline">Titel</label><br>
-                    <input type="text" name="headline" maxlength="80" size="80" id="headline"><br>
-                    <label for="long_text">Driftinformation för mejl och Wordpress</label><br>
-                    <textarea name="long_text"  rows="20" cols="80" maxlength="3000" id="long_text"></textarea><br>
-                    <label for="brief_text">Driftinformation för Twitter och SMS</label><br>
-                    <textarea name="brief_text" rows="4" cols="80" maxlength="280" id="brief_text"></textarea><br>
-                    Driftstörning:<input  type="checkbox" name="disturbance"><br>
-                    Användarnamn: <input type="text" name="username" id="username"><br>
-                    <input type="submit" value="Skicka driftinfo">
+                    <label for="headline">Titel (max 80 tecken)</label><br/>
+                    <input type="text" name="headline" maxlength="80" size="80" id="headline"><br/>
+                    <label for="long_text">Driftinformation för mejl och Wordpress (max 3000 tecken)</label><br/>
+                    <textarea name="long_text"  rows="20" cols="80" maxlength="3000" id="long_text"></textarea><br/>
+                    <label for="brief_text">Driftinformation för Twitter och SMS (max 280 tecken)</label><br/>
+                    <textarea name="brief_text" rows="4" cols="80" maxlength="280" id="brief_text"></textarea><br/>
+                    Driftstörning:<input  type="checkbox" name="disturbance"><br/>
+                    Användarnamn: <input type="text" name="username" id="username" maxlength="100"><br/><br/>
+                    <input type="submit" value="Skicka driftinfo"><br/>
                 </form>
             </div>
         </div>
