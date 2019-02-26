@@ -12,7 +12,7 @@ with open(config_file,'r') as ymlfile:
 @app.route('/')
 @app.route('/submit', methods=['POST'])
 def bacon_form():
-    if request.method == "POST":
+    if request.method == "POST" && request.form.valiate():
        brief_text = request.form.get('brief_text')
        headline = request.form.get('headline')
        long_text  = request.form.get('long_text')
