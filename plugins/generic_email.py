@@ -7,11 +7,14 @@ import sqlite3
 import sys
 import yaml
 
-service = sys.argv[0]
+service = sys.argv[1]
 valid_services = ["wordpress", "sms"]
 use_short = ["sms"]
-if service not in valid_sevices:
-    print(service +" is not one of the valid services: " . valid_services.toString())
+if service not in valid_services:
+    msg = service + " is not one of the valid services:"
+    for e in  valid_services:
+        msg += " " + e
+    print(msg)
     sys.exit(1)
 
 config_file = '/local/driftinfo/conf/config_file.yml'
@@ -43,18 +46,17 @@ def connect_to_db():
 
         now = datetime.now()
         dtime = now.strftime("%d/%m/%Y %H:%M:%S")
-        sql_select_Query = "select * from driftinfo where processed_wordress = 0"
+        sql_select_Query = "select * from driftinfo where processed_" + service +" = 0"
         cursor = conn.cursor()
         cursor.execute(sql_select_Query)
+        print("Total of unprocessed messages for " + service + " in driftinfo is ", cursor.rowcount)
         records = cursor.fetchall()
-        print("Total of information in driftinfo is ", cursor.rowcount)
-        print("Printing each row's column values in driftinfo")
         for row in records:
             message = row[4]
             if service in use_short:
                 message = row[1]
             send_email(row[3],message)
-            sql_update_Query = "update driftinfo set processed_" + service + " ="+ str(dtime) + " where id = " + str(row[0])
+            sql_update_Query = "update driftinfo set processed_" + service + " =\""+ str(dtime) + "\" where id = " + str(row[0])
             cursor.execute(sql_update_Query)
             conn.commit()
         cursor.close()
@@ -64,7 +66,5 @@ def connect_to_db():
     finally:
         conn.close()
         print('Connection closed.')
-
-
 
 connect_to_db()
