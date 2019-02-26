@@ -33,7 +33,7 @@
                         E-post till listan driftinfo@su.se
                     </li>
                 </ul>
-                <form method="POST" action="/submit" autocomplete="on" form="usrform" >
+                <form method="POST" action="/submit" autocomplete="on" form="usrform" onsubmit="return validateForm()" >
                     <label for="headline">Titel</label><br>
                     <input type="text" name="headline" maxlength="80" size="80"><br>
                     <label for="long_text">Driftinformation för mejl och Wordpress</label><br>
