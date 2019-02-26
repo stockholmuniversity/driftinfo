@@ -8,7 +8,7 @@ import sys
 import yaml
 
 service = sys.argv[1]
-valid_services = ["wordpress", "sms"]
+valid_services = ["wordpress", "sms", "mail"]
 use_short = ["sms"]
 if service not in valid_services:
     msg = service + " is not one of the valid services:"

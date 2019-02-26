@@ -3,8 +3,9 @@ app:
 email:
     email_from: ''
     password: ''
-    send_to_email_wordpress: ''
+    send_to_email_mail: ''
     send_to_email_sms: ''
+    send_to_email_wordpress: ''
 
 twitter:
     key: ''
