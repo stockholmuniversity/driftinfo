@@ -13,36 +13,38 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <img src="assets/su-blog.jpg" width="940" height="198" alt="SU Logo" />
-        <H2>L&auml;gga ut driftinformation f&ouml;r SU</h2>
-        <div>
-            H&auml;r l&auml;gger du ut driftinformation f&ouml;r alla kanaler<br>
-            F&ouml;r mer information om driftinformation se <a href="https://confluence.it.su.se/confluence/x/iYB5Ag">Confluence</a><br>
-            F&ouml;r standrardtexter se <a href="https://confluence.it.su.se/confluence/x/AwTZAg" target="_blank">Standardtexter</a> 
-            <ul>
-                <li>
-                    <a href="http://driftinfo.it.su.se">www.driftinfo.it.su.se</a>
-                </li>
-                <li>
-                    <a href="http://www.su.se">www.su.se</a>
-                    <div>L&auml;ggs p&aring; flera st&auml;llen beroende p&aring; kategorier f&ouml;r mer info se 
-                    <a href="https://confluence.it.su.se/confluence/x/iYB5Ag" target="_blank">Confluence</a> (&ouml;ppnas i ny flik)</div>
-                </li>
-                <li>
-                    E-post till listan driftinfo@su.se
-                </li>
-            </ul>
-            <form method="POST" action="/submit" autocomplete="on" form="usrform" >
-                <label for="headline">Titel</label><br>
-                <input type="text" name="headline" maxlength="80" size="100"><br>
-                <label for="long_text">Driftinformation</label><br>
-                <textarea name="long_text"  rows="20" cols="40"></textarea><br>
-                <label for="brief_text">Driftinformation för Twitter och SMS</label><br>
-                <input  type="text" name="brief_text"><br>
-                Driftstörning:<input  type="checkbox" name="disturbance"><br>
-                Användarnamn: <input type="username"><br> 
-                <input type="submit" value="Skicka driftinfo">
-            </form>
+        <div class="container">
+            <img src="assets/su-blog.jpg" width="940" height="198" alt="SU Logo" />
+            <H2>L&auml;gga ut driftinformation f&ouml;r SU</h2>
+            <div>
+                H&auml;r l&auml;gger du ut driftinformation f&ouml;r alla kanaler<br>
+                F&ouml;r mer information om driftinformation se <a href="https://confluence.it.su.se/confluence/x/iYB5Ag">Confluence</a><br>
+                F&ouml;r standrardtexter se <a href="https://confluence.it.su.se/confluence/x/AwTZAg" target="_blank">Standardtexter</a> 
+                <ul>
+                    <li>
+                        <a href="http://driftinfo.it.su.se">www.driftinfo.it.su.se</a>
+                    </li>
+                    <li>
+                        <a href="http://www.su.se">www.su.se</a>
+                        <div>L&auml;ggs p&aring; flera st&auml;llen beroende p&aring; kategorier f&ouml;r mer info se 
+                        <a href="https://confluence.it.su.se/confluence/x/iYB5Ag" target="_blank">Confluence</a> (&ouml;ppnas i ny flik)</div>
+                    </li>
+                    <li>
+                        E-post till listan driftinfo@su.se
+                    </li>
+                </ul>
+                <form method="POST" action="/submit" autocomplete="on" form="usrform" >
+                    <label for="headline">Titel</label><br>
+                    <input type="text" name="headline" maxlength="80" size="100"><br>
+                    <label for="long_text">Driftinformation</label><br>
+                    <textarea name="long_text"  rows="20" cols="40"></textarea><br>
+                    <label for="brief_text">Driftinformation för Twitter och SMS</label><br>
+                    <input  type="text" name="brief_text"><br>
+                    Driftstörning:<input  type="checkbox" name="disturbance"><br>
+                    Användarnamn: <input type="username"><br> 
+                    <input type="submit" value="Skicka driftinfo">
+                </form>
+            </div>
         </div>
     </body>
 </html>
