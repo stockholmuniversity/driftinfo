@@ -1,3 +1,4 @@
+#!/local/driftinfo/venv/bin/python3
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
@@ -9,8 +10,6 @@ import yaml
 config_file = '/local/driftinfo/conf/config_file.yml'
 with open(config_file,'r') as ymlfile:
     cfg = yaml.load(ymlfile)
-
-
 
 #lägger upp en post till wordpress genom att skicka en email
 def send_email(headline,message):

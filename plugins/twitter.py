@@ -1,3 +1,4 @@
+#!/local/driftinfo/venv/bin/python3
 import twitter
 from datetime import datetime
 import sqlite3
