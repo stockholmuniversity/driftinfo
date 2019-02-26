@@ -20,8 +20,7 @@
         <Directory "/local/driftinfo/assets">
             Options +Indexes  
             AllowOverride None  
-            Order allow,deny  
-            Allow from all  
+            Require all granted
         </Directory>
         # Available loglevels: trace8, ..., trace1, debug, info, notice, warn,
         # error, crit, alert, emerg.
