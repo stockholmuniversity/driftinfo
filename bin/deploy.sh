@@ -45,6 +45,7 @@ cp -a assets ${BASEDIR}
 cp -a bin ${BASEDIR}
 cp -a conf ${BASEDIR}
 cp -a plugins ${venv}
+cd ..
 certbot --apache -d ${HOST} --non-interactive --agree-tos --email 'sunet-scs@su.se'
 sed 's/%%HOST%%/'${HOST}'/g' ${BASEDIR}/conf/apache.conf.in > /etc/apache2/sites-enabled/000-default-le-ssl.conf 
 chown -R www-data:www-data /local/driftinfo/assets
