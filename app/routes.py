@@ -16,13 +16,14 @@ def bacon_form():
        brief_text = request.form.get('brief_text')
        headline = request.form.get('headline')
        long_text  = request.form.get('long_text')
+       username  = request.form.get('long_text')
        disturbance_checkbox = request.form.get('disturbance')
        disturbance = 0
        if disturbance_checkbox == "on":
            disturbance = 1
        conn = sqlite3.connect(cfg['driftinfo_for_database']['path_to_database'])
        cur = conn.cursor()
-       cur.execute("INSERT INTO driftinfo (headline,long_text,brief_text,disturbance)  VALUES(?,?,?,?)",(headline,long_text,brief_text,disturbance))
+       cur.execute("INSERT INTO driftinfo (headline,long_text,brief_text,disturbance,username)  VALUES(?,?,?,?,?)",(headline,long_text,brief_text,disturbance,username))
        conn.commit()
        cur.close()
        return render_template('/submitted.html', headline=headline, long_text=long_text, brief_text=brief_text, disturbance=disturbance)

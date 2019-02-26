@@ -8,5 +8,6 @@ create table if not exists driftinfo (
     processed_sms TIMESTAMP DEFAULT 0,
     processed_twitter TIMESTAMP DEFAULT 0,
     processed_wordpress TIMESTAMP DEFAULT 0,
-    timestamp TIMESTAMP  DEFAULT CURRENT_TIMESTAMP
+    timestamp TIMESTAMP  DEFAULT CURRENT_TIMESTAMP,
+    username text (100)
 );
