@@ -1,8 +1,8 @@
 function validateForm() {
-    var headline = document.forms["usrform"]["headline"].value;
-    var long_text = document.forms["usrform"]["long_text"].value;
-    var brief_text = document.forms["usrform"]["brief_text"].value;
-    var username = document.forms["usrform"]["username"].value;
+    var headline = document.getElementById("headline").value;
+    var long_text = document.getElementById("long_text").value;
+    var brief_text = document.getElementById("brief_text").value;
+    var username = document.getElementById("username").value;
     var errorarray = new Array();
     var error = false;
     if ( headline == "" ) {

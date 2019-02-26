@@ -38,13 +38,13 @@
                 </ul>
                 <form method="POST" action="/submit" autocomplete="on" form="usrform" onsubmit="return validateForm()" >
                     <label for="headline">Titel</label><br>
-                    <input type="text" name="headline" maxlength="80" size="80"><br>
+                    <input type="text" name="headline" maxlength="80" size="80" id="headline"><br>
                     <label for="long_text">Driftinformation för mejl och Wordpress</label><br>
-                    <textarea name="long_text"  rows="20" cols="80" maxlength="3000"></textarea><br>
+                    <textarea name="long_text"  rows="20" cols="80" maxlength="3000" id=long_text"></textarea><br>
                     <label for="brief_text">Driftinformation för Twitter och SMS</label><br>
-                    <textarea name="brief_text" rows="4" cols="80" maxlength="280"></textarea><br>
+                    <textarea name="brief_text" rows="4" cols="80" maxlength="280" id="brief_text"></textarea><br>
                     Driftstörning:<input  type="checkbox" name="disturbance"><br>
-                    Användarnamn: <input type="username"><br> 
+                    Användarnamn: <input type="username" id="username"><br>
                     <input type="submit" value="Skicka driftinfo">
                 </form>
             </div>
