@@ -1,21 +1,27 @@
 #!/local/driftinfo/venv/bin/python3
-import smtplib
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
-import sqlite3
 from datetime import datetime
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+import smtplib
+import sqlite3
+import sys
 import yaml
 
+service = sys.argv[0]
+valid_services = ["wordpress", "sms"]
+use_short = ["sms"]
+if service not in valid_sevices:
+    print(service +" is not one of the valid services: " . valid_services.toString())
+    sys.exit(1)
 
 config_file = '/local/driftinfo/conf/config_file.yml'
 with open(config_file,'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
-#lägger upp en post till wordpress genom att skicka en email
 def send_email(headline,message):
-    email = cfg['driftinfo']['email_from']
-    password = cfg['driftinfo']['password']
-    send_to_email = cfg['driftinfo']['send_to_email']
+    email = cfg['email']['email_from']
+    password = cfg['email']['password']
+    send_to_email = cfg['email']['send_to_email_' + service ]
     msg = MIMEMultipart()
     msg['From'] = email
     msg['To'] = send_to_email
@@ -30,11 +36,10 @@ def send_email(headline,message):
     server.sendmail(email, send_to_email, text)
     server.quit()
 
-#anslutar till wordpress databasen
-def connect_to_Wordpress():
+def connect_to_db():
     print( """ Connect to database """)
     try:
-        conn = sqlite3.connect(cfg['driftinfo_for_database']['path_to_database'])
+        conn = sqlite3.connect(cfg['database']['path'])
 
         now = datetime.now()
         dtime = now.strftime("%d/%m/%Y %H:%M:%S")
@@ -45,8 +50,11 @@ def connect_to_Wordpress():
         print("Total of information in driftinfo is ", cursor.rowcount)
         print("Printing each row's column values in driftinfo")
         for row in records:
-            send_email(row[3],row[4])
-            sql_update_Query = "update driftinfo set processed_wordpress ="+ str(dtime) + " where id = " + str(row[0])
+            message = row[4]
+            if service in use_short:
+                message = row[1]
+            send_email(row[3],message)
+            sql_update_Query = "update driftinfo set processed_" + service + " ="+ str(dtime) + " where id = " + str(row[0])
             cursor.execute(sql_update_Query)
             conn.commit()
         cursor.close()
@@ -59,4 +67,4 @@ def connect_to_Wordpress():
 
 
 
-connect_to_Wordpress()
+connect_to_dbs()

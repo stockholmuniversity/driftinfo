@@ -10,10 +10,10 @@ with open(config_file,'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
 def send_to_twitter(twitter_data):
-    consumer_key = cfg['driftinfo_for_twitter']['key']
-    consumer_secret = cfg['driftinfo_for_twitter']['secret']
-    access_token = cfg['driftinfo_for_twitter']['token']
-    access_secret = cfg['driftinfo_for_twitter']['token_secret']
+    consumer_key = cfg['twitter']['key']
+    consumer_secret = cfg['twitter']['secret']
+    access_token = cfg['twitter']['token']
+    access_secret = cfg['twitter']['token_secret']
     api = twitter.Api(consumer_key=consumer_key,
                       consumer_secret=consumer_secret,
                       access_token_key=access_token,
@@ -25,7 +25,7 @@ def send_to_twitter(twitter_data):
 
 def connect_to_Twitter():
     try:
-        conn = sqlite3.connect(cfg['driftinfo_for_database']['path_to_database'])
+        conn = sqlite3.connect(cfg['database']['path'])
         now = datetime.now()
         dtime = now.strftime("%d/%m/%Y %H:%M:%S")
         sql_select_Query = 'select * from driftinfo where processed_twitter = 0'

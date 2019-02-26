@@ -1,22 +1,17 @@
 app:
-    secret_key: 'kano0049'
-driftinfo:
+    secret_key: ''
+email:
     email_from: ''
     password: ''
-    send_to_email: ''
+    send_to_email_wordpress: ''
+    send_to_email_sms: ''
 
-driftinfo_for_sms:
-    sid: ''
-    token: ''
-    nummer: ''
-    to_nummer: '' 
-
-driftinfo_for_twitter:
+twitter:
     key: ''
     secret: ''
     token: ''
     token_secret: ''
 
-driftinfo_for_database:
-    path_to_database: '/local/driftinfo/db/driftinfo.db'
+database:
+    path: '/local/driftinfo/db/driftinfo.db'
 

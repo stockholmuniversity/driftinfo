@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-from flask import render_template, request, flash
 from app import app
 from app import db
+from flask import render_template, request, flash
 import sqlite3
 import yaml 
 
@@ -21,7 +21,7 @@ def bacon_form():
        disturbance = 0
        if disturbance_checkbox == "on":
            disturbance = 1
-       conn = sqlite3.connect(cfg['driftinfo_for_database']['path_to_database'])
+       conn = sqlite3.connect(cfg['database']['path'])
        cur = conn.cursor()
        cur.execute("INSERT INTO driftinfo (headline,long_text,brief_text,disturbance,username)  VALUES(?,?,?,?,?)",(headline,long_text,brief_text,disturbance,username))
        conn.commit()
