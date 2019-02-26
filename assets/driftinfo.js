@@ -5,25 +5,24 @@ function validateForm() {
     var username = document.getElementById("username").value;
     var errorarray = new Array();
     var error = false;
-    alert("headline: " + headline + " long_text: " + long_text + " brief_text: "  + brief_text + " username: " + username);
     if ( headline == "" ) {
         errorarray.push("Titel");
         error = true;
     }
     if ( long_text == "" ) {
-        errorarray.push("Driftinformation f&ouml;r mejl och Wordpress");
+        errorarray.push("Driftinformation för mejl och Wordpress");
         error = true;
     }
     if ( brief_text == "" ) {
-        errorarray.push("Driftinformation f&ouml;r Twitter och SMS");
+        errorarray.push("Driftinformation för Twitter och SMS");
         error = true;
     }
     if ( username == "" ) {
-        errorarray.push("Anv&auml;ndarnamn");
+        errorarray.push("Användarnamn");
         error = true;
     }
     if ( error ) {
-        alert("F&ouml;ljande f&auml;lt m&aring;ste vara ifyllda: " + errorarray.toString());
+        alert("Följande fält måste vara ifyllda: " + errorarray.toString());
         return false;
     }
 }
