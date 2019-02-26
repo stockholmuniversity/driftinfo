@@ -11,6 +11,8 @@
 
         ServerAdmin webmaster@localhost
         DocumentRoot /var/www/html
+
+        ProxyPassMatch ^/assets !
         ProxyPass "/" "http://localhost:5000/"
         ProxyPassReverse "/" "http://localhost:5000/"
 
