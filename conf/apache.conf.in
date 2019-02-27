@@ -15,6 +15,12 @@
         ProxyPassMatch ^/assets !
         ProxyPass "/" "http://localhost:5000/"
         ProxyPassReverse "/" "http://localhost:5000/"
+        <Location "/">
+                AuthType Basic
+                AuthName "Restricted Content"
+                AuthUserFile /local/driftinfo/conf/.htpasswd
+                Require valid-user
+        </Location>
 
         Alias /assets "/local/driftinfo/assets"
         <Directory "/local/driftinfo/assets">

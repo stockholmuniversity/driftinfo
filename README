@@ -3,4 +3,7 @@ This is an flask webservice that stores information about maintanence and distur
 There is also some plugis that you can use to sent the information it to various places, such as wordpress, twitter, maillists etc.
 
 Deploy  to a debian server by running:
-   curl https://raw.githubusercontent.com/stockholmuniversity/driftinfo/master/bin/deploy.sh | bash
+    curl https://raw.githubusercontent.com/stockholmuniversity/driftinfo/master/bin/deploy.sh | bash
+
+Add users by running the htpasswd program:
+    htpasswd -nbB -c /local/driftinfo/conf/.htpasswd <username> <password>

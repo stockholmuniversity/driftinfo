@@ -6,7 +6,6 @@ fi
 mydir=$(pwd)
 tempdir=$(mktemp -d)
 cd ${tempdir}
-noclobber="/local/driftinfo/conf/config_file.yml"
 HOST=$(hostname --fqdn)
 apt-get update
 apt-get -y install python3 python3-venv sqlite3 apache2 certbot python-certbot-apache git
@@ -15,6 +14,7 @@ systemctl restart apache2
 
 BASEDIR="/local/driftinfo"
 venv="${BASEDIR}/venv"
+noclobber="${BASEDIR}/conf/config_file.yml ${BASEDIR}/conf/.htpasswd ${BASEDIR}/db/driftinfo.db"
 mkdir -p ${BASEDIR}/{db,logs}
 if [[ ! -d "${venv}" ]]; then
     python3 -m venv "${venv}"
@@ -34,8 +34,10 @@ else
 fi
 mkdir saved
 for i in ${noclobber}; do
-    short="saved/$(echo ${i} | sed 's_.*/__')"
-    cp ${i} ${short}
+    if [[ -f ${i} ]]; then
+        short="saved/$(echo ${i} | sed 's_.*/__')"
+        cp ${i} ${short}
+    fi
 done
 git clone https://github.com/stockholmuniversity/driftinfo.git
 cd driftinfo
@@ -50,8 +52,13 @@ certbot --apache -d ${HOST} --non-interactive --agree-tos --email 'sunet-scs@su.
 sed 's/%%HOST%%/'${HOST}'/g' ${BASEDIR}/conf/apache.conf.in > /etc/apache2/sites-enabled/000-default-le-ssl.conf 
 chown -R www-data:www-data /local/driftinfo/assets
 for i in ${noclobber}; do
-    short="saved/$(echo ${i} | sed 's_.*/__')"
-    cp ${short} ${i}
+    if [[ -f ${i} ]]; then
+        short="saved/$(echo ${i} | sed 's_.*/__')"
+        cp ${short} ${i}
+    fi
 done
 cd "${mydir}"
 rm -r "${tempdir}"
+if [[ ! -f ${BASEDIR}/conf/.htpasswd ]]; then
+    touch "${BASEDIR}/conf/.htpasswd"
+fi

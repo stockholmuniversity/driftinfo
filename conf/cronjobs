@@ -1,0 +1,2 @@
+# This is the cronjobs run by the driftinfo application 
+* * * * * nobody /local/driftinfo/bin/run_plugins.py

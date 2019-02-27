@@ -1,5 +1,17 @@
+# Flask app config
 app:
     secret_key: ''
+# Database config
+database:
+    path: '/local/driftinfo/db/driftinfo.db'
+# Enumeration of plugins
+plugins:
+    - twitter:
+    - generic_email:
+        - mail
+        - wordpress
+        - sms
+# Specific configuration for plugins
 email:
     email_from: ''
     password: ''
@@ -12,7 +24,3 @@ twitter:
     secret: ''
     token: ''
     token_secret: ''
-
-database:
-    path: '/local/driftinfo/db/driftinfo.db'
-
