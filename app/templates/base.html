@@ -44,7 +44,7 @@
                     <label for="brief_text">Driftinformation för Twitter och SMS (max 280 tecken)</label><br/>
                     <textarea name="brief_text" rows="4" cols="80" maxlength="280" id="brief_text"></textarea><br/>
                     Driftstörning:<input  type="checkbox" name="disturbance"><br/>
-                    Användarnamn: <input type="text" name="username" id="username" maxlength="100"><br/><br/>
+                    <input type="hidden" name="username" value={{remote_user}}><br/><br/>
                     <input type="submit" value="Skicka driftinfo"><br/>
                 </form>
             </div>

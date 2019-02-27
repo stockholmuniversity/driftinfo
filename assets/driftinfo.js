@@ -2,7 +2,6 @@ function validateForm() {
     var headline = document.getElementById("headline").value;
     var long_text = document.getElementById("long_text").value;
     var brief_text = document.getElementById("brief_text").value;
-    var username = document.getElementById("username").value;
     var errorarray = new Array();
     var error = false;
     if ( headline == "" ) {
@@ -15,10 +14,6 @@ function validateForm() {
     }
     if ( brief_text == "" ) {
         errorarray.push("Driftinformation för Twitter och SMS");
-        error = true;
-    }
-    if ( username == "" ) {
-        errorarray.push("Användarnamn");
         error = true;
     }
     if ( error ) {
