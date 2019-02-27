@@ -24,12 +24,14 @@ if [[ ! -d "${venv}" ]]; then
     pip install flask_sqlalchemy
     pip install pyyaml
     pip install sqlalchemy
+    pip install twitter
 else
     source "${venv}/bin/activate"
     pip install --upgrade flask
     pip install --upgrade flask_sqlalchemy
     pip install --upgrade pyyaml
     pip install --upgrade sqlalchemy
+    pip install --upgrade twitter
     
 fi
 mkdir saved

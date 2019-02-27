@@ -41,7 +41,7 @@ def connect_to_Twitter():
             conn.commit()
         cursor.close()
 
-    except Error as error:
+    except ConnectionError as error:
         print(error)
 
     finally:
