@@ -2,7 +2,6 @@
 from app import app
 from app import db
 from flask import render_template, request, flash
-import os
 import sqlite3
 import yaml 
 
@@ -28,7 +27,7 @@ def bacon_form():
        conn.commit()
        cur.close()
        return render_template('/submitted.html', headline=headline, long_text=long_text, brief_text=brief_text, disturbance=disturbance, username=username)
-    return render_template('/base.html', remote_user=os.environ["REMOTE_USER"])
+    return render_template('/base.html', remote_user=request.authorization["username"])
 
 
 app.secret_key=cfg['app']['secret_key']
