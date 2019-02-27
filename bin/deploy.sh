@@ -47,11 +47,16 @@ cp -a bin ${BASEDIR}
 cp -a conf ${BASEDIR}
 cp -a plugins ${venv}
 cp ${BASEDIR}/conf/driftinfocronjobs /etc/cron.d/
+cp ${BASEDIR}/conf/driftinfo.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable driftinfo.service
 sqlite3 "${BASEDIR}/db/driftinfo.db" "$(cat conf/table.sql)"
 cd ..
 certbot --apache -d ${HOST} --non-interactive --agree-tos --email 'sunet-scs@su.se'
 sed 's/%%HOST%%/'${HOST}'/g' ${BASEDIR}/conf/apache.conf.in > /etc/apache2/sites-enabled/000-default-le-ssl.conf 
-chown -R www-data:www-data /local/driftinfo/assets
+chown -R www-data:www-data ${BASEDIR}/assets
+chown -R nobody:root ${BASEDIR}/db/
+chown -R nobody:root ${BASEDIR}/logs/
 for i in ${noclobber}; do
     if [[ -f ${i} ]]; then
         short="saved/$(echo ${i} | sed 's_.*/__')"
@@ -63,3 +68,4 @@ rm -r "${tempdir}"
 if [[ ! -f ${BASEDIR}/conf/.htpasswd ]]; then
     touch "${BASEDIR}/conf/.htpasswd"
 fi
+systemctl restart apache2
