@@ -6,7 +6,7 @@ database:
     path: '/local/driftinfo/db/driftinfo.db'
 # Enumeration of plugins
 plugins:
-    - twitter:
+    - twitterapi:
     - generic_email:
         - mail
         - wordpress
