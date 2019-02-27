@@ -6,4 +6,4 @@ Deploy  to a debian server by running:
     curl https://raw.githubusercontent.com/stockholmuniversity/driftinfo/master/bin/deploy.sh | bash
 
 Add users by running the htpasswd program:
-    htpasswd -nbB -c /local/driftinfo/conf/.htpasswd <username> <password>
+    htpasswd -bB -c /local/driftinfo/conf/.htpasswd <username> <password>
