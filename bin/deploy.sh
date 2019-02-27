@@ -46,6 +46,7 @@ cp -a assets ${BASEDIR}
 cp -a bin ${BASEDIR}
 cp -a conf ${BASEDIR}
 cp -a plugins ${venv}
+cp ${BASEDIR}/conf/driftinfocronjobs /etc/cron.d/
 sqlite3 "${BASEDIR}/db/driftinfo.db" "$(cat conf/table.sql)"
 cd ..
 certbot --apache -d ${HOST} --non-interactive --agree-tos --email 'sunet-scs@su.se'
