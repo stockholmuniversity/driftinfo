@@ -10,8 +10,8 @@ with open(config_file,'r') as ymlfile:
     cfg = yaml.load(ymlfile)
 
 @app.route('/')
-@app.route('/submit', methods=['POST'])
-def bacon_form():
+@app.route('/display', methods=['POST'])
+def driftinfo_form():
     if request.method == "POST":
        brief_text = request.form.get('brief_text')
        headline = request.form.get('headline')
