@@ -6,9 +6,8 @@ fi
 mydir=$(pwd)
 tempdir=$(mktemp -d)
 cd ${tempdir}
-HOST=$(hostname --fqdn)
 apt-get update
-apt-get -y install python3 python3-venv sqlite3 apache2 certbot python-certbot-apache git
+apt-get -y install python3 python3-venv sqlite3 apache2 certbot python-certbot-apache git jq
 a2enmod proxy proxy_http
 systemctl restart apache2
 
@@ -52,8 +51,20 @@ cp ${BASEDIR}/conf/driftinfocronjobs /etc/cron.d/
 cp ${BASEDIR}/conf/driftinfo.service /etc/systemd/system/
 systemctl daemon-reload
 systemctl enable driftinfo.service
+# This will not change the structure of db if it allready exists
+# That means that if you change the structure of the database you
+# need to manually update the structure of your db-file
 sqlite3 "${BASEDIR}/db/driftinfo.db" "$(cat conf/table.sql)"
 cd ..
+if [[ -f saved/config_file.yml ]]; then
+    hostname=$(cat saved/config_file.yml | ${venv}/bin/python3 -c 'import sys, yaml, json; json.dump(yaml.load(sys.stdin), sys.stdout, indent=4)' | jq -r .domain)
+fi
+if [[ "${hostname}" == "null"  ]] || [[ "x${hostname}" == "x" ]]; then
+    HOST=$(hostname --fqdn)
+else
+    HOST=${hostname}
+fi
+
 certbot --apache -d ${HOST} --non-interactive --agree-tos --email 'sunet-scs@su.se'
 sed 's/%%HOST%%/'${HOST}'/g' ${BASEDIR}/conf/apache.conf.in > /etc/apache2/sites-enabled/000-default-le-ssl.conf 
 chown -R www-data:www-data ${BASEDIR}/assets

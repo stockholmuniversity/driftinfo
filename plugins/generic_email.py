@@ -8,10 +8,16 @@ import sys
 import yaml
 
 service = sys.argv[1]
+valid_services = []
 config_file = '/local/driftinfo/conf/config_file.yml'
 with open(config_file,'r') as ymlfile:
     cfg = yaml.load(ymlfile)
-valid_services = cfg['plugins']['generic_email']
+
+for obj in cfg['plugins']:
+    for plugin in obj:
+        if plugin == "generic_email":
+            valid_services = obj[plugin]
+
 use_brief_text = ["sms"]
 disturbance_only = ["sms"]
 

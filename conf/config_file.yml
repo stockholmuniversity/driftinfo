@@ -1,4 +1,5 @@
 # Flask app config
+domain: ''
 app:
     secret_key: ''
 # Database config
