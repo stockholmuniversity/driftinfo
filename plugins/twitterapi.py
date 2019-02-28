@@ -35,7 +35,7 @@ def connect_to_Twitter():
         print("Total of information in driftinfo is ", len(records))
         for row in records:
             send_to_twitter(row[1])
-            sql_update_Query = "update driftinfo set twitter_process =" + str(dtime) + " where id  = " + str(row[0])
+            sql_update_Query = "update driftinfo set processed_twitter =\""+ str(dtime) + "\" where id = " + str(row[0])
             cursor.execute(sql_update_Query)
             conn.commit()
         cursor.close()
