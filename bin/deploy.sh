@@ -8,7 +8,7 @@ tempdir=$(mktemp -d)
 cd ${tempdir}
 apt-get update
 apt-get -y install python3 python3-venv sqlite3 apache2 certbot python-certbot-apache git jq
-a2enmod proxy proxy_http
+a2enmod proxy proxy_http rewrite
 systemctl restart apache2
 
 BASEDIR="/local/driftinfo"
