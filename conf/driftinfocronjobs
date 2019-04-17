@@ -1,2 +1,3 @@
 # This is the cronjobs run by the driftinfo application 
 * * * * * nobody /local/driftinfo/bin/run_plugins.py
+1 1 10 * * root /usr/bin/certbot renew >/dev/null 2>&1
