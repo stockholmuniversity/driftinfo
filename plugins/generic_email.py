@@ -11,7 +11,7 @@ service = sys.argv[1]
 valid_services = []
 config_file = '/local/driftinfo/conf/config_file.yml'
 with open(config_file,'r') as ymlfile:
-    cfg = yaml.load(ymlfile)
+    cfg = yaml.load(ymlfile,Loader=yaml.SafeLoader)
 
 for obj in cfg['plugins']:
     for plugin in obj:
@@ -53,7 +53,7 @@ def connect_to_db():
 
         now = datetime.now()
         dtime = now.strftime("%d/%m/%Y %H:%M:%S")
-        sql_select_Query = "select * from driftinfo where processed_" + service +" = 0"
+        sql_select_Query = "select id,brief_text,headline,long_text,categories from driftinfo where processed_" + service +" = 0"
         if service in disturbance_only:
             sql_select_Query += " AND disturbance = 1" 
         cursor = conn.cursor()
@@ -61,10 +61,12 @@ def connect_to_db():
         records = cursor.fetchall()
         print("Total of unprocessed messages for " + service + " in driftinfo is ", len(records))
         for row in records:
-            message = row[4]
+            message = row[3]
+            if service == "wordpress" :
+                message += "\n[category "+ row[4] + "]"
             if service in use_brief_text:
                 message = row[1]
-            send_email(row[3],message)
+            send_email(row[2],message)
             sql_update_Query = "update driftinfo set processed_" + service + " =\""+ str(dtime) + "\" where id = " + str(row[0])
             cursor.execute(sql_update_Query)
             conn.commit()

@@ -1,6 +1,7 @@
 create table if not exists driftinfo (
     id integer primary key autoincrement,
     brief_text text (280),
+    categories text (1000),
     disturbance integer (1) DEFAULT 0,
     headline text (1000),
     long_text text (3000),

@@ -46,6 +46,18 @@
                 <form method="POST" action="/display" autocomplete="on" form="usrform" onsubmit="return validateForm()" >
                     <label for="headline">Titel (max 80 tecken)</label><br/>
                     <input type="text" name="headline" maxlength="80" size="80" id="headline"><br/>
+		    <div class="form-group">
+			<label for="category">V&auml;lj kategori f&ouml;r Wordpress (h&aring;ll in shift/ctrl/cmd/alt-tangenten f&ouml;r att v&auml;lja flera)</label><br/>
+			<select id="category" name="category" multiple="yes">
+                            <option value="Aktuellt">Aktuellt</option>
+                            <option value="E-post">E-post</option>
+                            <option value="IDP">IDP</option>
+                            <option value="Kontoaktivering">Kontoaktivering</option>
+                            <option value="Ladok">Ladok</option>
+                            <option value="Mina studier">Mina studier</option>
+                            <option value="Mondo">Mondo</option>
+                        </select>
+                    </div>
                     <label for="long_text">Driftinformation för mejl och Wordpress (max 3000 tecken)</label><br/>
                     <textarea name="long_text"  rows="20" cols="80" maxlength="3000" id="long_text"></textarea><br/>
                     <label for="brief_text">Driftinformation för Twitter och SMS (max 280 tecken)</label><br/>
