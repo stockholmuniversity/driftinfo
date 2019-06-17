@@ -82,3 +82,4 @@ if [[ ! -f ${BASEDIR}/conf/.htpasswd ]]; then
     touch "${BASEDIR}/conf/.htpasswd"
 fi
 systemctl restart apache2
+systemctl restart driftinfo
