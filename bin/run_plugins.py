@@ -4,7 +4,7 @@ import yaml
 
 config_file = '/local/driftinfo/conf/config_file.yml'
 with open(config_file,'r') as ymlfile:
-    cfg = yaml.load(ymlfile)
+    cfg = yaml.load(ymlfile, Loader=yaml.FullLoader)
 plugin_conf = cfg['plugins']
 commands = []
 for plugin_object in plugin_conf:

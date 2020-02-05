@@ -1,19 +1,19 @@
 #!/local/driftinfo/venv/bin/python3
-import twitter
+
 from datetime import datetime
 import sqlite3
 import yaml
+import twitter
 
-
-config_file = '/local/driftinfo/conf/config_file.yml'
-with open(config_file,'r') as ymlfile:
-    cfg = yaml.load(ymlfile)
+CONFIG_FILE = '/local/driftinfo/conf/config_file.yml'
+with open(CONFIG_FILE, 'r') as ymlfile:
+    CFG = yaml.load(ymlfile, Loader=yaml.FullLoader)
 
 def send_to_twitter(twitter_data):
-    consumer_key = cfg['twitter']['key']
-    consumer_secret = cfg['twitter']['secret']
-    access_token = cfg['twitter']['token']
-    access_secret = cfg['twitter']['token_secret']
+    consumer_key = CFG['twitter']['key']
+    consumer_secret = CFG['twitter']['secret']
+    access_token = CFG['twitter']['token']
+    access_secret = CFG['twitter']['token_secret']
     api = twitter.Api(consumer_key=consumer_key,
                       consumer_secret=consumer_secret,
                       access_token_key=access_token,
@@ -22,21 +22,22 @@ def send_to_twitter(twitter_data):
     status = api.PostUpdate(twitter_data)
     print(status.text)
 
-
-def connect_to_Twitter():
+def connect_to_twitter():
     try:
-        conn = sqlite3.connect(cfg['database']['path'])
+        conn = sqlite3.connect(CFG['database']['path'])
         now = datetime.now()
         dtime = now.strftime("%d/%m/%Y %H:%M:%S")
-        sql_select_Query = 'select * from driftinfo where processed_twitter = 0'
+        sql_select_query = 'select * from driftinfo where processed_twitter = 0'
         cursor = conn.cursor()
-        cursor.execute(sql_select_Query)
+        cursor.execute(sql_select_query)
         records = cursor.fetchall()
         print("Total of information in driftinfo is ", len(records))
         for row in records:
-            send_to_twitter(row[1])
-            sql_update_Query = "update driftinfo set processed_twitter =\""+ str(dtime) + "\" where id = " + str(row[0])
-            cursor.execute(sql_update_Query)
+            twitterdata = row[1][:279]
+            send_to_twitter(twitterdata)
+            sql_update_query = "update driftinfo set processed_twitter =\""+\
+                                str(dtime) + "\" where id = " + str(row[0])
+            cursor.execute(sql_update_query)
             conn.commit()
         cursor.close()
 
@@ -49,4 +50,4 @@ def connect_to_Twitter():
 
 
 if __name__ == '__main__':
-    connect_to_Twitter()
+    connect_to_twitter()
