@@ -16,6 +16,11 @@ function validateForm() {
         errorarray.push("Driftinformation för Twitter och SMS");
         error = true;
     }
+    if ( brief_text.length > 160 ) {
+        errorarray.push("Driftinformation för Twitter och SMS (max 160 tecken)");
+        error = true;
+    }
+ 
     if ( error ) {
         alert("Följande fält måste vara ifyllda: " + errorarray.toString());
         return false;
