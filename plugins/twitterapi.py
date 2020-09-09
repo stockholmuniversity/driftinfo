@@ -1,10 +1,18 @@
 #!/local/driftinfo/venv/bin/python3
 
 from datetime import datetime
+import sys
 import sqlite3
 import yaml
 import twitter
-
+try:
+    sys.stdout = open('/local/driftinfo/logs/twitterapi_stdout', 'a+')
+    sys.stderr = open('/local/driftinfo/logs/twitterapi_stderr', 'a+')
+except:
+    print("Assigning stdout/err didn't go too well.")
+    pass
+print("\n")
+print(datetime.now())
 CONFIG_FILE = '/local/driftinfo/conf/config_file.yml'
 with open(CONFIG_FILE, 'r') as ymlfile:
     CFG = yaml.load(ymlfile, Loader=yaml.FullLoader)
@@ -34,6 +42,7 @@ def connect_to_twitter():
         print("Total of information in driftinfo is ", len(records))
         for row in records:
             twitterdata = row[1][:279]
+            print("Data is: \n\n{}\n\n".format(row[1]))
             send_to_twitter(twitterdata)
             sql_update_query = "update driftinfo set processed_twitter =\""+\
                                 str(dtime) + "\" where id = " + str(row[0])
