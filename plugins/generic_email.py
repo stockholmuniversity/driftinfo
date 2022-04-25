@@ -67,7 +67,7 @@ def connect_to_db():
 
         now = datetime.now()
         dtime = now.strftime("%d/%m/%Y %H:%M:%S")
-        sql_select_Query = "select id,brief_text,headline,long_text,categories from driftinfo where processed_" + service +" = 0"
+        sql_select_Query = "select id,brief_text,headline,long_text,itmail_text,categories from driftinfo where processed_" + service +" = 0"
         if service in disturbance_only:
             sql_select_Query += " AND disturbance = 1" 
         cursor = conn.cursor()
@@ -77,10 +77,13 @@ def connect_to_db():
         for row in records:
             message = row[3]
             if service == "wordpress" :
-                message += "\n[category "+ row[4] + "]"
+                message += "\n[category "+ row[5] + "]"
             if service in use_brief_text:
                 message = row[1]
-            send_email(row[2],message)
+            if service == "itmail":
+                send_email(row[2],row[4])
+            else:
+                send_email(row[2],message)
             sql_update_Query = "update driftinfo set processed_" + service + " =\""+ str(dtime) + "\" where id = " + str(row[0])
             cursor.execute(sql_update_Query)
             conn.commit()

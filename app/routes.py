@@ -16,6 +16,7 @@ def driftinfo_form():
        brief_text = request.form.get('brief_text')
        headline = request.form.get('headline')
        long_text  = request.form.get('long_text')
+       itmail_text  = request.form.get('itmail_text')
        username  = request.form.get('username')
        categories  = str.join(',',request.form.getlist('category'))
        disturbance_checkbox = request.form.get('disturbance')
@@ -24,7 +25,7 @@ def driftinfo_form():
            disturbance = 1
        conn = sqlite3.connect(cfg['database']['path'])
        cur = conn.cursor()
-       cur.execute("INSERT INTO driftinfo (headline,long_text,brief_text,disturbance,username,categories)  VALUES(?,?,?,?,?,?)",(headline,long_text,brief_text,disturbance,username,categories))
+       cur.execute("INSERT INTO driftinfo (headline,long_text,itmail_text,brief_text,disturbance,username,categories)  VALUES(?,?,?,?,?,?,?)",(headline,long_text,itmail_text,brief_text,disturbance,username,categories))
        conn.commit()
        cur.close()
        return render_template('/submitted.html', headline=headline, long_text=long_text, brief_text=brief_text, disturbance=disturbance, username=username, categories=categories)

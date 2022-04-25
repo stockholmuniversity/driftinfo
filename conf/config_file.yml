@@ -10,15 +10,20 @@ plugins:
     - twitterapi:
     - generic_email:
         - mail
+        - itmail
         - wordpress
         - sms
 # Specific configuration for plugins
 email:
-    email_from: ''
-    password: ''
+    email_from_office365: ''
+    user_office365: ''
+    password_office365: ''
     send_to_email_mail: ''
     send_to_email_sms: ''
     send_to_email_wordpress: ''
+    send_to_email_itmail: ''
+    smtp_address_office365: ''
+    smtp_port_office365: 587
 
 twitter:
     key: ''
