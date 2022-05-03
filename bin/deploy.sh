@@ -48,9 +48,9 @@ cp -a bin ${BASEDIR}
 cp -a conf ${BASEDIR}
 cp -a plugins ${venv}
 cp ${BASEDIR}/conf/driftinfocronjobs /etc/cron.d/
-cp ${BASEDIR}/conf/driftinfo.service /etc/systemd/system/
+cp ${BASEDIR}/conf/sua-driftinfo.service /etc/systemd/system/
 systemctl daemon-reload
-systemctl enable driftinfo.service
+systemctl enable sua-driftinfo.service
 # This will not change the structure of db if it allready exists
 # That means that if you change the structure of the database you
 # need to manually update the structure of your db-file
