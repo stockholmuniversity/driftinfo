@@ -1,12 +1,14 @@
 [Unit]
 Description=Driftinfo Flask App
-After=syslog.target network.target
+After=syslog.target network.target network-online.target
 
 [Service]
 User=nobody
 Group=nogroup
 Type=forking
 ExecStart=/local/driftinfo/bin/run.sh
+Restart=always
+RestartSec=30
 
 [Install]
 WantedBy=multi-user.target
